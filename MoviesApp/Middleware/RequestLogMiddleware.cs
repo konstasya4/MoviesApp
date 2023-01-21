@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -7,6 +8,7 @@ namespace MoviesApp.Middleware
     public class RequestLogMiddleware
     {
         private readonly RequestDelegate _next;
+       
 
         public RequestLogMiddleware(RequestDelegate next)
         {
@@ -15,7 +17,13 @@ namespace MoviesApp.Middleware
 
         public async Task Invoke(HttpContext httpContext, ILogger<RequestLogMiddleware> logger)
         {
-            logger.LogTrace($"Request: {httpContext.Request.Path}  Method: {httpContext.Request.Method}");
+            string req = httpContext.Request.Path;
+            bool hasTom = req.Contains("/Actors");
+            if (hasTom)
+            {
+                logger.LogInformation($"Request: {httpContext.Request.Path}/{httpContext.Request.Body}/{httpContext.Request.Headers}  Method: {httpContext.Request.Method}");
+            }
+
             await _next(httpContext);
         }
     }

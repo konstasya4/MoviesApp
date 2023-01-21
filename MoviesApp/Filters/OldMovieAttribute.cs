@@ -10,7 +10,6 @@ namespace MoviesApp.Filters
         {
             Year = year;
         }
-        // public static DateTime Today => Now.Date;
         public int Year { get; }
 
         public string GetErrorMessage() =>

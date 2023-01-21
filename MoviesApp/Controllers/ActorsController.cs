@@ -65,6 +65,7 @@ namespace MoviesApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [EnsureReleaseDateBeforeNow]
+        [AgeActor]
         public IActionResult Create([Bind("Name,Surname,DateOfBirth")] InputActorsViewModel inputModel)
         {
             if (ModelState.IsValid)
@@ -102,6 +103,8 @@ namespace MoviesApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [EnsureReleaseDateBeforeNow]
+        [AgeActor]
         public IActionResult Edit(int id, [Bind("Name,Surname,DateOfBirth")] EditActorsViewModel editModel)
         {
             if (ModelState.IsValid)
