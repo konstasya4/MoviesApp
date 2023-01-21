@@ -18,8 +18,8 @@ namespace MoviesApp.Middleware
         public async Task Invoke(HttpContext httpContext, ILogger<RequestLogMiddleware> logger)
         {
             string req = httpContext.Request.Path;
-            bool hasTom = req.Contains("/Actors");
-            if (hasTom)
+            bool request = req.Contains("/Actors");
+            if (request)
             {
                 logger.LogInformation($"Request: {httpContext.Request.Path}/{httpContext.Request.Body}/{httpContext.Request.Headers}  Method: {httpContext.Request.Method}");
             }
