@@ -31,7 +31,7 @@ namespace MoviesApp
                     logger.LogError(ex, "An error occurred seeding the DB.");
                 }
             }
-            
+
             host.Run();
         }
 

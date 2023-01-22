@@ -8,7 +8,7 @@ namespace MoviesApp.Middleware
     public class RequestLogMiddleware
     {
         private readonly RequestDelegate _next;
-       
+
 
         public RequestLogMiddleware(RequestDelegate next)
         {
@@ -21,7 +21,8 @@ namespace MoviesApp.Middleware
             bool request = req.Contains("/Actors");
             if (request)
             {
-                logger.LogInformation($"Request: {httpContext.Request.Path}/{httpContext.Request.Body}/{httpContext.Request.Headers}  Method: {httpContext.Request.Method}");
+                logger.LogInformation(
+                    $"Request: {httpContext.Request.Path}/{httpContext.Request.ContentLength}/{httpContext.Request.Cookies}/ {httpContext.Request.Body}/{httpContext.Request.IsHttps}/{httpContext.Request.Scheme}  Method: {httpContext.Request.Method}");
             }
 
             await _next(httpContext);

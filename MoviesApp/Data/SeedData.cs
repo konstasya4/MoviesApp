@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MoviesApp.Models;
@@ -14,10 +15,9 @@ namespace MoviesApp.Data
             using (var context =
                    new MoviesContext(serviceProvider.GetRequiredService<DbContextOptions<MoviesContext>>()))
             {
-                // Look for any movies.
-                if (context.Actors.Any())
+                if (!context.Actors.Any())
                 {
-                    return; // DB has been seeded
+                    return; 
                 }
                 context.Actors.AddRange(
                     new Actor
@@ -48,10 +48,9 @@ namespace MoviesApp.Data
 
                 context.SaveChanges();
                 
-                // Look for any movies.
-                if (context.Movies.Any())
+                if (!context.Movies.Any())
                 {
-                    return; // DB has been seeded
+                    return; 
                 }
 
                 context.Movies.AddRange(
@@ -86,6 +85,31 @@ namespace MoviesApp.Data
                 );
 
                 context.SaveChanges();
+            }
+            var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
+            var roleManager = serviceProvider.GetService<RoleManager<IdentityRole>>();
+
+            if (!roleManager.RoleExistsAsync("Admin").Result)
+            {
+                roleManager.CreateAsync(new IdentityRole { Name = "Admin" }).Wait();
+            }
+                
+            if (userManager.FindByEmailAsync("admin@example.com").Result == null)
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = "admin@example.com",
+                    Email = "admin@example.com",
+                    FirstName = "Super",
+                    LastName = "Admin"
+                };
+
+                IdentityResult result = userManager.CreateAsync(user, "P@ssw0rd").Result;
+ 
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, "Admin").Wait();
+                }
             }
         }
     }

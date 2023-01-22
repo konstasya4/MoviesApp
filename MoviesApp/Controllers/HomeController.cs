@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 
 namespace MoviesApp.Controllers
 {
-    public class HomeController: Controller
+    public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
 
@@ -11,14 +11,14 @@ namespace MoviesApp.Controllers
         {
             _logger = logger;
         }
-        
+
         // GET: /
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
-        
+
         // GET: Home/Privacy
         [HttpGet]
         public IActionResult Privacy()

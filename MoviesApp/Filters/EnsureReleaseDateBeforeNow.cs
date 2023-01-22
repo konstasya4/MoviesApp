@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace MoviesApp.Filters
 {
-    public class EnsureReleaseDateBeforeNow: Attribute, IActionFilter
+    public class EnsureReleaseDateBeforeNow : Attribute, IActionFilter
     {
         public void OnActionExecuting(ActionExecutingContext context)
         {
@@ -14,10 +14,9 @@ namespace MoviesApp.Filters
                 context.Result = new BadRequestResult();
             }
         }
-        
+
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            
         }
     }
 }

@@ -1,5 +1,6 @@
 using MoviesApp.Models;
 using AutoMapper;
+using MoviesApp.Services.Dto;
 
 namespace MoviesApp.ViewModels.AutoMapperProfiles
 {
@@ -7,10 +8,10 @@ namespace MoviesApp.ViewModels.AutoMapperProfiles
     {
         public ActorProfile()
         {
-            CreateMap<Actor, InputActorsViewModel>().ReverseMap();
-            CreateMap<Actor, DeleteActorsViewModel>();
-            CreateMap<Actor, EditActorsViewModel>().ReverseMap();
-            CreateMap<Actor, ActorsViewModel>();
+            CreateMap<ActorDto, InputActorsViewModel>().ReverseMap();
+            CreateMap<ActorDto, DeleteActorsViewModel>();
+            CreateMap<ActorDto, EditActorsViewModel>().ReverseMap();
+            CreateMap<ActorDto, ActorsViewModel>();
         }
     }
 }

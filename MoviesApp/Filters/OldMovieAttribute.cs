@@ -10,6 +10,7 @@ namespace MoviesApp.Filters
         {
             Year = year;
         }
+
         public int Year { get; }
 
         public string GetErrorMessage() =>
@@ -17,7 +18,7 @@ namespace MoviesApp.Filters
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var releaseYear = ((DateTime) value).Year;
+            var releaseYear = ((DateTime)value).Year;
 
             if (releaseYear < Year)
             {

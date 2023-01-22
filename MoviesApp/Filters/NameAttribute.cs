@@ -13,12 +13,11 @@ namespace MoviesApp.Filters
         }
 
         public int Count { get; }
-       
 
 
         public string GetErrorMessage() =>
             $"The length of this value can't be less than {Count}.";
-       
+
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             if (value is string)
